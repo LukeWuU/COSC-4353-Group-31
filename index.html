@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+
+        #login {
+            background-color: plum;
+            color: black;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #firstHeader {
+            background-color: lightpink;
+            color: black;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #Header {
+            background-color: lightblue;
+            color: black;
+            padding: 30px;
+            text-align: center;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+
+    <title>Fuel Rate Clients</title>
+
+</head>
+<body>
+
+    <h1 id="login">Login</h1>
+    <h3>Enter login details</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="loginFunction()">
+        <input id="add-username" type="text" placeholder="Enter username">
+        <input id="add-password" type="text" placeholder="Enter password">
+        <input type="submit" value="Add">
+        <p id="p1"></p>
+    </form>
+
+    <h1 id="firstHeader">Client Management</h1>
+    <h3>Add Client Name</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addClientFunction()">
+        <input type="text" id="add-name" placeholder="Enter new client name">
+        <input type="submit" value="Add">
+        <p id="p001"></p>
+    </form>
+
+    <div id="editForm">
+        <h3>Edit Client Info</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="text" id="edit-id" placeholder="Enter client ID">
+            <input type="text" id="edit-name" placeholder="Enter client name">
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+    <p id="counter"></p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Select Item</th>
+            <th>Name</th>
+            <th>Add/Edit Info</th>
+            <th>Delete Client (no undo)</th>
+        </tr>
+        <tbody id="clients"></tbody>
+    </table>
+
+    <h1 id="Header">Fuel Quote</h1>
+
+    <form>
+        Select your vehicle type:
+        <select id="vehicle_type">
+            <option>Car</option>
+            <option>Truck</option>
+            <option>Hybrid</option>
+            <option>Motorcycle</option>
+            <option>Watercraft</option>
+            <option>Recreational</option>
+        </select>
+    </form>
+
+    <p>Please enter fuel gallons used. Value must not exceed 500 gallons:</p>
+
+    <input id="gallons_used" type="text">
+    <button type="button" onclick="gallonsUsedFunction()">Enter Usage Value</button>
+    <p id="p03"></p>
+
+    <form>
+        Select your approximate fuel rate:
+        <select id="rate">
+            <option>0.05</option>
+            <option>0.10</option>
+            <option>0.15</option>
+            <option>0.20</option>
+            <option>0.25</option>
+            <option>0.30</option>
+            <option>0.35</option>
+            <option>0.40</option>
+            <option>0.45</option>
+            <option>0.50</option>
+            <option>0.55</option>
+            <option>0.60</option>
+            <option>0.65</option>
+            <option>0.70</option>
+            <option>0.75</option>
+            <option>0.80</option>
+            <option>0.85</option>
+            <option>0.90</option>
+            <option>0.95</option>
+            <option>1.00</option>
+        </select>
+    </form>
+
+    <table style="width:100%">
+        <tr>
+            <th>Vehicle</th>
+            <th>Gallons Used</th>
+            <th>Fuel Price</th>
+        </tr>
+        <tbody id="fuel_Quote"></tbody>
+    </table>
+
+    <script>
+        function loginFunction() {
+            const message = document.getElementById("p1");
+            message.innerHTML = "Login successful.";
+            let x = document.getElementById("add-username").value;
+            let y = document.getElementById("add-password").value;
+            try {
+                if (x == "" && y == "") throw "Login field ";
+                if (x == "") throw "Username field ";
+                if (y == "") throw "Password field ";
+                else
+                    return;
+            }
+            catch (err) {
+                message.innerHTML = err + "is empty.";
+            }
+        }
+    </script>
+
+    <script>
+        function addClientFunction() {
+            const message = document.getElementById("p001");
+            message.innerHTML = "Client entered.";
+            let x = document.getElementById("add-name").value;
+            try {
+                if (x == "") throw "empty.";
+                if (Number(x) || x == 0) throw "not a valid name.";
+                else
+                    addItem();
+                return;
+            }
+            catch (err) {
+                message.innerHTML = "Input field is " + err;
+            }
+        }
+    </script>
+
+    <script>
+        function vehicleTypeFunction() {
+            const message = document.getElementById("p02");
+            message.innerHTML = "Vehicle type entered.";
+            document.getElementById("vehicle_type").value;
+        }
+    </script>
+
+    <script>
+        function gallonsUsedFunction() {
+            const message = document.getElementById("p03");
+            message.innerHTML = "Value entered.";
+            let x = document.getElementById("gallons_used").value;
+            try {
+                if (x == "") throw "empty.";
+                if (isNaN(x) || x == 0) throw "not valid.";
+                x = Number(x);
+                if (x < 0) throw "insufficient.";
+                if (x > 500) throw "over usage limit.";
+            }
+            catch (err) {
+                message.innerHTML = "Value is " + err;
+            }
+        }
+    </script>
+
+    <script>
+        function rateFunction() {
+            const message = document.getElementById("p01");
+            message.innerHTML = "Amount entered.";
+            document.getElementById("rate").value;
+        }
+    </script>
+
+    <script>
+        function displayRates(quote) {
+            const tBody = document.getElementById('rates');
+            tBody.innerHTML = '';
+
+            quote.forEach(fuel_Quote => {
+                let tr = tBody.insertRow();
+
+                let td1 = tr.insertCell(0);
+                let textNode = document.createTextNode('Vehicle type');
+                td1.appendChild(textNode);
+
+                let td2 = tr.insertCell(1);
+                let textNode = document.createTextNode('Gallons');
+                td2.appendChild(textNode);
+
+                let td3 = tr.insertCell(2);
+                let textNode = document.CreateTextNode('Fuel Price Quote');
+                td3.appendChild(textNode);
+            });
+
+            fuel_Quote = quote;
+        }
+    </script>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getItems();
+    </script>
+</body>
+</html>

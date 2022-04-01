@@ -1,4 +1,4 @@
-Integrated backend functionality from Assignment 1 with frontend functionality from Assignment 2.
+Integrated backend functionality from Assignment 4 with frontend functionality from Assignment 2.
 
 Login page has added Javascript code containing a basic input validation module along with the corresponding 
 function call for backend connectivity. The backend functionality portion was commented out for later

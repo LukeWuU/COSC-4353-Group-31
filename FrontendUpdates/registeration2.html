@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Completion | Fuel Quote</title>
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/quartz/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="#">FuelQuote</a>
+              <button class="navbar-toggler"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#navbarColor02"
+                      aria-controls="navbarColor02"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarColor02">
+                  <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                          <a class="nav-link active" href="/login.html">
+                              Home
+                              <span class="visually-hidden">(current)</span>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/profile.html">Profile</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/fuelquote.html">Request</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/fuelquotehistory.html">History</a>
+                      </li>
+                  </ul>
+                  <form class="d-flex">
+                      <h6 class="loginT">Login</h6>
+                      <button class="form-control me-sm-2" id="btn">
+                          <a href="/login.html"><i class="fa fa-user"></i></a>
+                      </button>
+                  </form>
+              </div>
+          </div>
+      </nav>
+      <div class="container">
+          <div class="card border-success" style="max-width: 50rem">
+              <div class="card-header" style="text-align: center">
+                  STEP II: Profile Details
+              </div>
+              <div class="card-body">
+                  <h4 class="card-title">Please enter your profile details</h4>
+                  <form action="javascript:void(0);" method="POST" onsubmit="addClientFunction()">
+                      <fieldset>
+                          <!-- 50 char -->
+                          <div class="form-group">
+                              <label for="fullname" class="form-label mt-4">Full Name</label>
+                              <input type="text"
+                                     class="form-control"
+                                     id="add-name"
+                                     aria-describedby="fullname" />
+                          </div>
+
+                          <!-- 100 char -->
+                          <div class="form-group">
+                              <label for="address" class="form-label mt-4">Address Line 1:</label>
+                              <input type="text"
+                                     class="form-control"
+                                     id="add-address"
+                                     aria-describedby="address" />
+                          </div>
+
+                          <!-- 100 char -->
+                          <div class="form-group">
+                              <label for="address2" class="form-label mt-4">Address Line 2:</label>
+                              <input type="text"
+                                     class="form-control"
+                                     id="add-address2"
+                                     aria-describedby="address2" />
+                          </div>
+
+                          <!-- 100 char -->
+                          <div class="form-group">
+                              <label for="city" class="form-label mt-4">City</label>
+                              <input type="text"
+                                     class="form-control"
+                                     id="add-city"
+                                     aria-describedby="city" />
+                          </div>
+
+                          <div class="form-group">
+                              <label for="state" class="form-label mt-4">State</label>
+                              <select class="form-select" id="add-state">
+                                  <option>AL</option>
+                                  <option>AK</option>
+                                  <option>AZ</option>
+                                  <option>AR</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>IA</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>ME</option>
+                                  <option>MD</option>
+                                  <option>MA</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MS</option>
+                                  <option>MO</option>
+                                  <option>MT</option>
+                                  <option>NE</option>
+                                  <option>NV</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NY</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VT</option>
+                                  <option>VA</option>
+                                  <option>WA</option>
+                                  <option>WV</option>
+                                  <option>WI</option>
+                                  <option>WY</option>
+                              </select>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="zipcode" class="form-label mt-4">Zipcode</label>
+                              <input type="text"
+                                     class="form-control"
+                                     id="add-zipcode"
+                                     aria-describedby="zipcode" />
+                          </div>
+                      </fieldset>
+                      <br />
+                      <button type="reset" class="btn btn-secondary">Reset</button>
+                      <button type="submit" class="btn btn-success">Continue</button>
+                      <p id="p2"></p>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+      <script>
+          function addClientFunction() {
+              const message = document.getElementById("p2");
+              message.innerHTML = "Client entered successfully.";
+              let x = document.getElementById("add-name").value;
+              try {
+                  if (x == "") throw "empty.";
+                  if (Number(x) || x == 0) throw "not a valid name.";
+                  else
+                      //addItems(); backend function to store registration info; tested on Visual Studio 2019; may redirect to login page afterwards
+                  return;
+              }
+              catch (err) {
+                  message.innerHTML = "Input field is " + err;
+              }
+          }
+      </script>
+
+      <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+          <div class="container text-center">
+              <small>2022 &copy; All rights reserved by the developer.</small>
+          </div>
+      </footer>
+      <script src="/js/app.js"></script>
+  </body>
+</html>

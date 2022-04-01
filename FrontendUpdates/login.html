@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/quartz/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">FuelQuote</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor02"
+          aria-controls="navbarColor02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"
+                >Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile.html">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/fuelquote.html">Request</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/fuelquotehistory.html">History</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <h6 class="loginT">Login</h6>
+            <button
+              class="form-control me-sm-2"
+              id="btn"
+              onclick="window.location.href='/login.html'"
+            >
+              <i class="fa fa-user"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="card border-success" style="max-width: 30rem">
+        <div class="card-header" style="text-align: center">
+          Fuel Quote Management System
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">User Login</h4>
+          <form action="javascript:void(0);" method="POST"">
+              <div class="form-group">
+                  <div class="form-floating mb-3">
+                      <input type="email"
+                             class="form-control"
+                             id="floatingInput"
+                             placeholder="Username" />
+                      <label for="floatingInput">Username</label>
+                  </div>
+                  <div class="form-floating">
+                      <input type="password"
+                             class="form-control"
+                             id="floatingPassword"
+                             placeholder="Password" />
+                      <label for="floatingPassword">Password</label>
+                  </div>
+              </div>
+              <br />
+              <div class="form-check form-switch" style="float: right">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         id="flexSwitchCheckChecked"
+                         checked="" />
+                  <label class="form-check-label" for="flexSwitchCheckChecked">Remember me!</label>
+              </div>
+              <button type="button" class="btn btn-secondary" onclick="reset()">Reset</button>
+              <button type="button" class="btn btn-success" onclick="loginFunction()">Login</button>
+              <p id="p1"></p>
+          </form>
+        </div>
+      </div>
+      <div class="caption">
+        <a href="/registration.html">Register</a> |
+        <a href="">Forget Password?</a>
+      </div>
+    </div>
+
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small>2022 &copy; All rights reserved by the developer.</small>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
+
+<script>
+    function reset() {
+        document.getElementById("floatingInput") = '';
+        document.getElementById("floatingPassword") = '';
+    }
+</script>
+<script>
+    function loginFunction() {
+        const message = document.getElementById("p1");
+        message.innerHTML = "Login successful.";
+        let x = document.getElementById("floatingInput").value;
+        let y = document.getElementById("floatingPassword").value;
+        try {
+            if (x == "" && y == "") throw "Login field ";
+            if (x == "") throw "Username field ";
+            if (y == "") throw "Password field ";
+            else
+                //addLoginItem(); backend function to add login info; tested using Visual Studio 2019
+                return;
+        }
+        catch (err) {
+            message.innerHTML = err + "is empty.";
+        }
+    }
+
+    function addLoginItem() {
+        const addUsernameTextbox = document.getElementById('add-username');
+        const addPasswordTextbox = document.getElementById('add-password');
+
+        const item = {
+            isComplete: false,
+            username: addUsernameTextbox.value.trim(),
+            password: addPasswordTextbox.value.trim(),
+            name: "n/a",
+            address: "n/a",
+            address2: "n/a",
+            city: "n/a",
+            state: "n/a",
+            zipcode: "n/a"
+        };
+
+        fetch(uri, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        })
+            .then(response => response.json())
+            .then(() => {
+                getItems();
+                addUsernameTextbox.value = '';
+                addPasswordTextbox.value = '';;
+            })
+            .catch(error => console.error('Unable to add item.', error));
+    }
+</script>
